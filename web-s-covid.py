@@ -8,7 +8,6 @@ Created on Wed Mar 18 22:02:37 2020
 from selenium import webdriver
 from bs4 import BeautifulSoup
 import pandas as pd
-import lxml.html
 import time
 
 driver = webdriver.Chrome()
@@ -29,11 +28,12 @@ total=[] #soma com valor total de casos
 driver.get("http://plataforma.saude.gov.br/novocoronavirus/#COVID-19-world")
 
 content = driver.page_source
-soup = BeautifulSoup(content, 'lxml.html')
 
-time.sleep(10)
+soup = BeautifulSoup(content)
+
+time.sleep(120) #Como a resposta do site demora, decidi colocar 2 minutos de sleep para esperar o resultado esperado
 
 for a in soup.findAll('div', attrs={'id':'BRTableByData'}):
     print(a)
-    
+      
 driver.quit()
